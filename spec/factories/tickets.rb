@@ -3,8 +3,8 @@ FactoryBot.define do
     request_number { '09252012-00001' }
     sequence_number { '2421' }
     request_type { 'Normal' }
-    reqponse_due_date { '2011/07/13 23:59:59' }
-    primay_sacode { 'ZZGL103' }
+    response_due_date { '2011/07/13 23:59:59' }
+    primary_sacode { 'ZZGL103' }
     additional_sacode { %w[ZZL01 ZZL02 ZZL03] }
     digsite_info_wkt { 'POLYGON((-81.13390268058475 32.07206917625161,-81.14660562247929 32.04064386441295,
                                  -81.08858407706913 32.02259853170128,-81.05322183341679 32.02434500961698,
@@ -17,8 +17,8 @@ FactoryBot.define do
       request_number { nil }
       sequence_number { nil }
       request_type { nil }
-      reqponse_due_date { nil }
-      primay_sacode { nil }
+      response_due_date { nil }
+      primary_sacode { nil }
       additional_sacode { nil }
       digsite_info_wkt { nil }
     end
