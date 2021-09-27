@@ -3,6 +3,7 @@ FactoryBot.define do
     company_name { 'MyString' }
     address { 'MyString' }
     crew_on_site { false }
+    association :ticket
 
     trait :invalid_data do
       company_name { nil }

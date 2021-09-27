@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
-
-  it 'has a valid factory' do
-    expect(build(:ticket)).to be_valid
-  end
-
   context 'when test validation' do
     let(:invalid_ticket) { build :ticket, :invalid_data }
+
+    it 'has a valid factory' do
+      expect(build(:ticket)).to be_valid
+    end
 
     context 'when test basic validations' do
       it { expect(invalid_ticket).to validate_presence_of(:request_number) }
@@ -103,5 +102,9 @@ RSpec.describe Ticket, type: :model do
         end
       end
     end
+  end
+
+  context 'when check Associations' do
+    it { is_expected.to have_one(:excavator) }
   end
 end

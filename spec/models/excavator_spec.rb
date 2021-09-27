@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Excavator, type: :model do
-
-  it 'has a valid factory' do
-    expect(build(:excavator)).to be_valid
-  end
-
   context 'when test validation' do
     let(:invalid_excavator) { build :excavator, :invalid_data }
+
+    it 'has a valid factory' do
+      expect(build(:excavator)).to be_valid
+    end
 
     context 'when test basic validations' do
       it { expect(invalid_excavator).to validate_presence_of(:company_name) }
@@ -30,5 +29,9 @@ RSpec.describe Excavator, type: :model do
         expect(valid_excavator).to allow_value(true).for(:crew_on_site)
       end
     end
+  end
+
+  context 'when check Associations' do
+    it { is_expected.to belong_to(:ticket) }
   end
 end

@@ -1,4 +1,5 @@
 class Ticket < ApplicationRecord
+  has_one :excavator
 
   validates :request_number, :sequence_number, :request_type, :response_due_date, :primary_sacode, :additional_sacode,
             :digsite_info_wkt, presence: true
