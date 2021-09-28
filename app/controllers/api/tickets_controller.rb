@@ -14,7 +14,9 @@ module Api
     def ticket_params
       params.require(:ticket).permit(:request_number, :sequence_number, :request_type,
                                      :response_due_date, :primary_sacode, :digsite_info_wkt,
-                                     additional_sacode: [])
+                                     additional_sacode: []).tap do |whitelisted|
+        # whitelisted.keys.collect(&:to_sym) # TODO: handle payload
+      end
     end
   end
 end
