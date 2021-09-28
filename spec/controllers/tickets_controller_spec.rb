@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe TicketsController, type: :controller do
-  let!(:ticket) { create :ticket }
+  let(:ticket) { create :ticket }
 
   describe 'GET#INDEX' do
     context 'when return list' do
