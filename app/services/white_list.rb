@@ -27,7 +27,8 @@ class WhiteList
 
   def handle_excavator_payload
     @exception = false
-    common_handler(ALLOWED_EXCAVATOR_LIST, options['Excavator'])
+    response = common_handler(ALLOWED_EXCAVATOR_LIST, options['Excavator'])
+    return_final_excavator(response)
   end
 
   def handle_ticket_payload
@@ -63,5 +64,17 @@ class WhiteList
   def update_settings(point)
     @result = []
     @control_point = point
+  end
+
+  def set_address(hsh)
+    [hsh[:address], hsh[:city], hsh[:state], hsh[:zip]].join(', ')
+  end
+
+  def return_final_excavator(hsh)
+    response = {}
+    response[:company_name] = hsh[:company_name]
+    response[:address] = set_address(hsh)
+    response[:crew_on_site] = hsh[:crew_on_site]
+    response
   end
 end

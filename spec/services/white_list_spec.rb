@@ -17,10 +17,7 @@ describe WhiteList do
     let(:handled_excavator_response) do
       {
         company_name: 'John Doe CONSTRUCTION',
-        address: '555 Some RD',
-        city: 'SOME PARK',
-        state: 'ZZ',
-        zip: '55555',
+        address: '555 Some RD, SOME PARK, ZZ, 55555',
         crew_on_site: 'true'
       }
     end

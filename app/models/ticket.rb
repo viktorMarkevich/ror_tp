@@ -9,6 +9,8 @@ class Ticket < ApplicationRecord
                                         message: 'should contain only numbers.' }
   validate :validate_service_area_code
 
+  accepts_nested_attributes_for :excavator
+
   private
 
   def validate_service_area_code
