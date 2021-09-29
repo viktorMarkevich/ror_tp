@@ -13,8 +13,7 @@ RSpec.describe Ticket, type: :model do
       it { expect(invalid_ticket).to validate_presence_of(:sequence_number) }
       it { expect(invalid_ticket).to validate_presence_of(:request_type) }
       it { expect(invalid_ticket).to validate_presence_of(:response_due_date) }
-      it { expect(invalid_ticket).to validate_presence_of(:primary_sacode) }
-      it { expect(invalid_ticket).to validate_presence_of(:additional_sacode) }
+      it { expect(invalid_ticket).to validate_presence_of(:service_area_code) }
       it { expect(invalid_ticket).to validate_presence_of(:digsite_info_wkt) }
     end
 
@@ -60,45 +59,24 @@ RSpec.describe Ticket, type: :model do
         end
       end
       
-      context 'when test primary_sacode' do
+      context 'when test service_area_code' do
         it 'returns invalid for for "-" symbol' do
-          expect(valid_ticket).not_to allow_value('ZZG-L103').for(:primary_sacode)
-                                      .with_message('please use uppercase alphabetic and numbers symbols only.')
+          expect(valid_ticket).not_to allow_value('ZZG-L103, ZZL01, ZZL-02, ZZL03').for(:service_area_code)
+                                      .with_message('please, use uppercase alphabetic and numbers symbols only.')
         end
 
         it 'returns invalid for for " " symbol' do
-          expect(valid_ticket).not_to allow_value('ZZ GL103').for(:primary_sacode)
-                                      .with_message('please use uppercase alphabetic and numbers symbols only.')
+          expect(valid_ticket).not_to allow_value('ZZ GL103, ZZL01, ZZL 02, ZZL03').for(:service_area_code)
+                                      .with_message('please, use uppercase alphabetic and numbers symbols only.')
         end
 
         it 'returns invalid for for lowercase symbol' do
-          expect(valid_ticket).not_to allow_value('ZzgL103').for(:primary_sacode)
-                                      .with_message('please use uppercase alphabetic and numbers symbols only.')
+          expect(valid_ticket).not_to allow_value('ZzgL103, ZZL01, Zzl02, ZZL03').for(:service_area_code)
+                                      .with_message('please, use uppercase alphabetic and numbers symbols only.')
         end
 
         it 'returns VALID for for lowercase symbol' do
-          expect(valid_ticket).to allow_value('ZZGL103').for(:primary_sacode)
-        end
-      end
-      
-      context 'when test additional_sacode' do
-        it 'returns invalid for for "-" symbol' do
-          expect(valid_ticket).not_to allow_value(%w[ZZL01 ZZL-02 ZZL03]).for(:additional_sacode)
-                                      .with_message('please use uppercase alphabetic and numbers symbols only for array item.')
-        end
-
-        it 'returns invalid for for " " symbol' do
-          expect(valid_ticket).not_to allow_value(%w[ZZL01 ZZL 02 ZZL03]).for(:additional_sacode)
-                                      .with_message('please use uppercase alphabetic and numbers symbols only for array item.')
-        end
-
-        it 'returns invalid for for lowercase symbol' do
-          expect(valid_ticket).not_to allow_value(%w[ZZL01 Zzl02 ZZL03]).for(:additional_sacode)
-                                      .with_message('please use uppercase alphabetic and numbers symbols only for array item.')
-        end
-
-        it 'returns VALID for for lowercase symbol' do
-          expect(valid_ticket).to allow_value(%w[ZZL01 ZZL02 ZZL03]).for(:additional_sacode)
+          expect(valid_ticket).to allow_value('ZZGL103, ZZL01, ZZL02, ZZL03').for(:service_area_code)
         end
       end
     end

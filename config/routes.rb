@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :tickets, only: %i[index show]
 
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     resources :tickets, only: :create
   end
 

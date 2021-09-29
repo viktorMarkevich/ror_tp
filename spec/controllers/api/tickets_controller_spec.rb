@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Api::TicketsController, type: :controller do
   describe 'POST#CREATE' do
     context 'with VALID params' do
-      let(:valid_params) { { ticket: (attributes_for :ticket) } } # TODO: change it to required JSON
+      let(:valid_params) { { ticket: payload } }
 
       it 'returns status 201' do
         post :create, params: valid_params
