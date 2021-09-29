@@ -3,7 +3,7 @@ require 'rails_helper'
 describe WhiteList do
   describe '#handle_payload' do
     let(:white_list) { described_class.new(ActionController::Parameters.new(payload)) }
-    let(:handled_response) do
+    let(:handled_ticket_response) do
       {
         request_number: '09252012-00001',
         sequence_number: '2421',
@@ -14,9 +14,29 @@ describe WhiteList do
       }
     end
 
+    let(:handled_excavator_response) do
+      {
+        company_name: 'John Doe CONSTRUCTION',
+        address: '555 Some RD',
+        city: 'SOME PARK',
+        state: 'ZZ',
+        zip: '55555',
+        crew_on_site: 'true'
+      }
+    end
+
     context 'with invalid params' do
-      it 'does nothing with no company creator present' do
-        expect(white_list.handle_payload).to eq(handled_response)
+      it 'return ticket response' do
+        expect(white_list.handle_ticket_payload).to eq(handled_ticket_response)
+      end
+
+      it 'return excavator response' do
+        expect(white_list.handle_excavator_payload).to eq(handled_excavator_response)
+      end
+
+      it 'return full handled response' do
+        expect(white_list.handle_payload).to eq(handled_ticket_response
+                                                            .merge(excavator_attributes: handled_excavator_response))
       end
     end
   end
