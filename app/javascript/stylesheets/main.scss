@@ -1,0 +1,125 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  @media (max-width: 991px) {
+    padding-top: 200px;
+  }
+}
+
+.navbar {
+  margin-bottom: 40px;
+  @media (max-width: 991px) {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+}
+
+.bg-blue {
+  background-color: #243f90;
+}
+
+thead.thead-custom {
+  background-color: #243f90 !important;
+  color: white;
+}
+
+.index-page {
+  border: 2px solid #03396c;
+}
+
+.text-info {
+  color: #0062cc !important;
+}
+
+body {
+  background-size: cover;
+  background-position: center center;
+}
+body > .container {
+  .justify-content-center {
+    height: 100vh;
+    align-items: center;
+  }
+
+  .login-container {
+    min-width: 250px;
+  }
+}
+
+.nav-link {
+  font-weight: bold;
+}
+
+form {
+  input.form-control, input.form-check-input, select.form-control, textarea.form-control {
+    background-color: #e6e6e6 !important;
+    border-color: #243f90;
+  }
+  .actions {
+    margin-top: 50px;
+  }
+}
+
+.order_filters {
+  input.dd-menu {
+    background-color: white !important;
+    border: 1px solid #ced4da;
+  }
+}
+
+.btn-warning {
+  background-color: #243f90;
+  color: black;
+  font-weight: bold;
+}
+
+// admins clients index page .padding-left
+.mg-left {
+  margin-left: 20px;
+}
+
+a.border {
+  border: 1px solid #243f90 !important;
+}
+
+a.del-color {
+  color: #243f90;
+}
+// pagination
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #243f90;
+  border-color: #243f90;
+}
+
+.page-item .page-link {
+  z-index: 1;
+  color: #243f90;
+}
+
+.hide {
+  display: none !important;
+}
+
+#alert {
+  opacity: 1 !important;
+}
+
+.field_with_errors {
+  display: contents !important;
+  select:nth-child(2) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+.required {
+  color: #243f90
+}
