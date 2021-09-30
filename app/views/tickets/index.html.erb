@@ -2,9 +2,18 @@
 
 <h1>Tickets</h1>
 
-<table>
+<table style="border: #2b2b2b 1px solid">
   <thead>
     <tr>
+      <th>Request Number</th>
+      <th>Sequence Number</th>
+      <th>Request Type</th>
+      <th>Response Due Date</th>
+      <th>Service area code</th>
+<!--      <th>Digsite Info WKT</th>-->
+      <th>Company Name</th>
+      <th>Address</th>
+      <th>Crew On Site</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -12,6 +21,15 @@
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
+        <td><%= ticket.request_number %></td>
+        <td><%= ticket.sequence_number %></td>
+        <td><%= ticket.request_type %></td>
+        <td><%= ticket.response_due_date %></td>
+        <td><%= ticket.service_area_code %></td>
+<!--        <td><%## ticket.digsite_info_wkt %></td>-->
+        <td><%= ticket.excavator.company_name %></td>
+        <td><%= ticket.excavator.address %></td>
+        <td><%= ticket.excavator.crew_on_site %></td>
         <td><%= link_to 'Show', ticket %></td>
       </tr>
     <% end %>

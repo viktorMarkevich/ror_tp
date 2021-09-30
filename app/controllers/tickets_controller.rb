@@ -1,10 +1,10 @@
 class TicketsController < ApplicationController
 
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.includes(:excavator)
   end
 
   def show
-    @ticket = Ticket.find(params[:id])
+    @ticket = Ticket.includes(:excavator).find(params[:id])
   end
 end
