@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Api::TicketsController, type: :controller do
   describe 'POST#CREATE' do
     context 'with VALID params' do
-      let(:valid_params) { { ticket: payload } }
+      let(:valid_params) { payload }
 
       it 'returns status 201' do
         post :create, params: valid_params
@@ -20,7 +20,7 @@ describe Api::TicketsController, type: :controller do
     end
 
     context 'with INVALID params' do
-      let(:invalid_params) { { ticket: payload.merge('RequestNumber' => nil) } }
+      let(:invalid_params) { payload.merge('RequestNumber' => nil) }
 
       it 'returns status 422' do
         post :create, params: invalid_params

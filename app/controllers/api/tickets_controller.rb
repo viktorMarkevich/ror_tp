@@ -12,7 +12,7 @@ module Api
     private
 
     def ticket_params
-      WhiteList.new(params[:ticket]).handle_payload
+      WhiteList.new(params).handle_payload
     end
   end
 end
