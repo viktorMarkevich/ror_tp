@@ -1,3 +1,17 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <strong><%= @ticket.excavator.company_name %></strong>
+      <h5 class="card-title"><strong>Address: </strong><%= @ticket.excavator.address %></h5>
+      <h5 class="card-title"><strong>Crew On Site: </strong><%= @ticket.excavator.crew_on_site %></h5>
+    </div>
+    <div class="card-body">
+      
 
-<%= link_to 'Back', tickets_path %>
+
+      <%= link_to 'Back', tickets_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+</div>
