@@ -20,5 +20,9 @@ FactoryBot.define do
       service_area_code { nil }
       digsite_info_wkt { nil }
     end
+
+    after :create do |ticket|
+      create(:excavator, ticket: ticket)
+    end
   end
 end
