@@ -11,6 +11,12 @@ class Ticket < ApplicationRecord
 
   accepts_nested_attributes_for :excavator
 
+  def polygon_coordinates
+    digsite_info_wkt.gsub('POLYGON((', '').gsub('))', '').split(',').map(&:split).map do |pair|
+      [ pair[0].to_f, pair[1].to_f ]
+    end
+  end
+
   private
 
   def validate_service_area_code

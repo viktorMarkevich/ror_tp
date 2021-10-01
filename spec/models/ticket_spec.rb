@@ -85,4 +85,14 @@ RSpec.describe Ticket, type: :model do
   context 'when check Associations' do
     it { is_expected.to have_one(:excavator) }
   end
+
+  context 'when methods test' do
+    it 'returns an array of coordinates' do
+      ticket = build :ticket,
+                     digsite_info_wkt: 'POLYGON((-81.13390268058475 32.07206917625161,-81.14660562247929 32.04064386441295))'
+
+      expect(ticket.polygon_coordinates).to eq([[-81.13390268058475, 32.07206917625161],
+                                                [-81.14660562247929, 32.04064386441295]])
+    end
+  end
 end

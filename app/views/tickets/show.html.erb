@@ -7,11 +7,40 @@
       <h5 class="card-title"><strong>Crew On Site: </strong><%= @ticket.excavator.crew_on_site %></h5>
     </div>
     <div class="card-body">
-      
-
-
+      <div style='width: 800px;'>
+        <div id="map" style='width: 800px; height: 400px;'></div>
+      </div>
       <%= link_to 'Back', tickets_path, class: "btn btn-primary" %>
     </div>
   </div>
 
 </div>
+
+<script>
+    function initMap(coordinates) {
+        var map, polygon;
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: {
+                lat: coordinates[0].lat,
+                lng: coordinates[0].lng
+            },
+            mapTypeId: 'terrain'
+        });
+        polygon = new google.maps.Polygon({
+            paths: coordinates,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35
+        });
+        polygon.setMap(map);
+        return map;
+    };
+    var coordinates = _.map(<%= @ticket.polygon_coordinates %>, function (pair) {
+        return {lat: pair[0], lng: pair[1]};
+    });
+    initMap(coordinates);
+
+</script>
