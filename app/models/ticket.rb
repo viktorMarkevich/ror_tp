@@ -1,6 +1,7 @@
 class Ticket < ApplicationRecord
   has_one :excavator
 
+  # validations not required
   validates :request_number, :sequence_number, :request_type, :response_due_date, :service_area_code,
             :digsite_info_wkt, presence: true
   validates :request_number, format: { with: /\A\d+.-\d+\z/,
@@ -13,7 +14,7 @@ class Ticket < ApplicationRecord
 
   def polygon_coordinates
     digsite_info_wkt.gsub('POLYGON((', '').gsub('))', '').split(',').map(&:split).map do |pair|
-      [ pair[0].to_f, pair[1].to_f ]
+      [ pair[1].to_f, pair[0].to_f ]
     end
   end
 
