@@ -2,13 +2,12 @@ class Ticket < ApplicationRecord
   has_one :excavator
 
   # validations not required
-  validates :request_number, :sequence_number, :request_type, :response_due_date, :service_area_code,
-            :digsite_info_wkt, presence: true
+  validates :request_number, :sequence_number, :request_type, :response_due_date, :digsite_info_wkt, presence: true
   validates :request_number, format: { with: /\A\d+.-\d+\z/,
                                        message: 'should contain only numbers and `-` symbol.' }
   validates :sequence_number, format: { with: /\A\d+\z/,
                                         message: 'should contain only numbers.' }
-  validate :validate_service_area_code
+  #  validate :validate_service_area_code
 
   accepts_nested_attributes_for :excavator
 

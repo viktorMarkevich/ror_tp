@@ -5,7 +5,8 @@ class WhiteList
                           sequence_number: 'SequenceNumber',
                           request_type: 'RequestType',
                           response_due_date: 'ResponseDueDateTime',
-                          service_area_code: 'SACode',
+                          additional_sacode: 'SACode',
+                          primary_sacode: 'SACode',
                           digsite_info_wkt: 'WellKnownText' }.freeze
 
   ALLOWED_EXCAVATOR_LIST = { company_name: 'CompanyName',
@@ -17,7 +18,6 @@ class WhiteList
 
   def initialize(options)
     @result = []
-    @control_point = ''
     @options = options
   end
 
@@ -25,29 +25,26 @@ class WhiteList
     handle_ticket_payload.merge(excavator_attributes: handle_excavator_payload)
   end
 
+  # TODO: need to refactor
   def handle_excavator_payload
     @exception = false
-    response = common_handler(ALLOWED_EXCAVATOR_LIST, options['Excavator'])
+    response = ALLOWED_EXCAVATOR_LIST.each_with_object({}) do |(attr, point), hsh|
+      hsh[attr] = result if has_key(options['Excavator'], point)
+    end
     return_final_excavator(response)
   end
 
   def handle_ticket_payload
-    common_handler(ALLOWED_TICKET_LIST)
+    ALLOWED_TICKET_LIST.each_with_object({}) do |(attr, point), hsh|
+      hsh[attr] = result if hard_has_key(options.except('Excavator'), point, attr)
+    end
   end
 
   private
 
-  def common_handler(white_list, params = options)
-    white_list.each_with_object({}) do |(attr, point), hsh|
-      hsh[attr] = result.join(', ') if has_key(params, point)
-    end
-  end
-
   def has_key(obj, point)
     if obj[point]
-      update_settings(point) if @control_point != point
-      @result << obj[point]
-      @result.flatten!
+      @result = obj[point]
 
       return true
     end
@@ -61,9 +58,22 @@ class WhiteList
     end
   end
 
-  def update_settings(point)
-    @result = []
-    @control_point = point
+  def hard_has_key(obj, point, attr)
+    if obj[point].present? &&
+      (obj[point].class == String && Ticket.new.send(attr).class == NilClass) ||
+      (obj[point].class == Array && Ticket.new.send(attr).class == Array) # can be nil == nil
+      @result = obj[point]
+
+      return true
+    end
+
+    obj.each do |key, val|
+      if point == key
+        return val
+      elsif val.class.to_s == 'ActionController::Parameters'
+        hard_has_key(val, point, attr)
+      end
+    end
   end
 
   def set_address(hsh)
