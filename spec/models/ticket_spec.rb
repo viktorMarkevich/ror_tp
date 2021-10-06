@@ -13,7 +13,6 @@ RSpec.describe Ticket, type: :model do
       it { expect(invalid_ticket).to validate_presence_of(:sequence_number) }
       it { expect(invalid_ticket).to validate_presence_of(:request_type) }
       it { expect(invalid_ticket).to validate_presence_of(:response_due_date) }
-      it { expect(invalid_ticket).to validate_presence_of(:service_area_code) }
       it { expect(invalid_ticket).to validate_presence_of(:digsite_info_wkt) }
     end
 
@@ -58,27 +57,6 @@ RSpec.describe Ticket, type: :model do
                                      .with_message("can't be blank")
         end
       end
-      
-      context 'when test service_area_code' do
-        it 'returns invalid for for "-" symbol' do
-          expect(valid_ticket).not_to allow_value('ZZG-L103, ZZL01, ZZL-02, ZZL03').for(:service_area_code)
-                                      .with_message('please, use uppercase alphabetic and numbers symbols only.')
-        end
-
-        it 'returns invalid for for " " symbol' do
-          expect(valid_ticket).not_to allow_value('ZZ GL103, ZZL01, ZZL 02, ZZL03').for(:service_area_code)
-                                      .with_message('please, use uppercase alphabetic and numbers symbols only.')
-        end
-
-        it 'returns invalid for for lowercase symbol' do
-          expect(valid_ticket).not_to allow_value('ZzgL103, ZZL01, Zzl02, ZZL03').for(:service_area_code)
-                                      .with_message('please, use uppercase alphabetic and numbers symbols only.')
-        end
-
-        it 'returns VALID for for lowercase symbol' do
-          expect(valid_ticket).to allow_value('ZZGL103, ZZL01, ZZL02, ZZL03').for(:service_area_code)
-        end
-      end
     end
   end
 
@@ -91,8 +69,8 @@ RSpec.describe Ticket, type: :model do
       ticket = build :ticket,
                      digsite_info_wkt: 'POLYGON((-81.13390268058475 32.07206917625161,-81.14660562247929 32.04064386441295))'
 
-      expect(ticket.polygon_coordinates).to eq([[-81.13390268058475, 32.07206917625161],
-                                                [-81.14660562247929, 32.04064386441295]])
+      expect(ticket.polygon_coordinates).to eq([[32.07206917625161, -81.13390268058475],
+                                                [32.04064386441295, -81.14660562247929]])
     end
   end
 end
