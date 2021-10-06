@@ -9,8 +9,8 @@
       <th>Sequence Number</th>
       <th>Request Type</th>
       <th>Response Due Date</th>
-      <th>Service area code</th>
-<!--      <th>Digsite Info WKT</th>-->
+      <th>Primary area code</th>
+      <th>Additional area code</th>
       <th>Company Name</th>
       <th>Address</th>
       <th>Crew On Site</th>
@@ -25,8 +25,8 @@
         <td><%= ticket.sequence_number %></td>
         <td><%= ticket.request_type %></td>
         <td><%= ticket.response_due_date %></td>
-        <td><%= ticket.service_area_code %></td>
-<!--        <td><%## ticket.digsite_info_wkt %></td>-->
+        <td><%= ticket.primary_sacode %></td>
+        <td><%= ticket.additional_sacode %></td>
         <td><%= ticket.excavator.company_name %></td>
         <td><%= ticket.excavator.address %></td>
         <td><%= ticket.excavator.crew_on_site %></td>

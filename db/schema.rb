@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_29_084653) do
+ActiveRecord::Schema.define(version: 2021_10_06_073620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,8 @@ ActiveRecord::Schema.define(version: 2021_09_29_084653) do
     t.string "request_type"
     t.datetime "response_due_date", precision: 6, null: false
     t.text "digsite_info_wkt"
-    t.string "service_area_code"
+    t.string "additional_sacode", default: [], array: true
+    t.string "primary_sacode"
   end
 
 end

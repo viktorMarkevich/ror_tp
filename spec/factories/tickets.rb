@@ -4,7 +4,8 @@ FactoryBot.define do
     sequence_number { '2421' }
     request_type { 'Normal' }
     response_due_date { '2011/07/13 23:59:59' }
-    service_area_code { 'ZZGL103, ZZL01, ZZL02, ZZL03' }
+    additional_sacode { %w[ZZL01 ZZL02 ZZL03] }
+    primary_sacode { 'ZZGL103' }
     digsite_info_wkt { 'POLYGON((-81.13390268058475 32.07206917625161,-81.14660562247929 32.04064386441295,
                                  -81.08858407706913 32.02259853170128,-81.05322183341679 32.02434500961698,
                                  -81.05047525138554 32.042681017283066,-81.0319358226746 32.06537765335268,
@@ -17,7 +18,8 @@ FactoryBot.define do
       sequence_number { nil }
       request_type { nil }
       response_due_date { nil }
-      service_area_code { nil }
+      additional_sacode { %w[ZZL01 ZZL02 ZZL03] }
+      primary_sacode { 'ZZGL103' }
       digsite_info_wkt { nil }
     end
 
